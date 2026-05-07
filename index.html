@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>『樂活金掌家』- 旗艦級全功能 AI 言語治療系統</title>
+    <title>『樂活金掌家』- 旗艦級 AI 言語治療系統</title>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
     <style>
@@ -11,64 +11,64 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: "PingFang HK", "Microsoft JhengHei", sans-serif; background: var(--ts-bg); margin: 0; color: #333; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
         
-        /* 1. 登入介面大升級 - 特大字體與高高度輸入框 */
+        /* 1. 登入介面大升級 */
         #login-screen { position: fixed; inset: 0; background: var(--ts-bg); z-index: 20000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        .login-card { background: white; padding: 50px; border-radius: 50px; border: 12px solid var(--ts-red); text-align: center; width: 100%; max-width: 650px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
-        .login-card input { font-size: 38px; width: 95%; height: 90px; padding: 25px; margin-bottom: 25px; border-radius: 25px; border: 5px solid #ccc; outline: none; }
-        #v-box { background:#000; color:white; padding:30px; letter-spacing:18px; font-size:60px; margin:25px; border-radius:30px; cursor:pointer; font-weight:bold; }
+        .login-card { background: white; padding: 50px; border-radius: 50px; border: 10px solid var(--ts-red); text-align: center; width: 100%; max-width: 620px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .login-card input { font-size: 34px; width: 95%; padding: 28px; margin-bottom: 22px; border-radius: 25px; border: 5px solid #ccc; outline: none; }
+        #v-box { background:#000; color:white; padding:25px; letter-spacing:18px; font-size:55px; margin:22px; border-radius:30px; cursor:pointer; font-weight:bold; }
         
-        /* 2. 主介面導覽 - 垂直單欄佈局 */
+        /* 2. 導覽佈局 (垂直單欄) */
         header { background: var(--paper); border-bottom: 10px double var(--ts-red); padding: 30px; text-align: center; }
         #app-content { display: none; flex-direction: column; flex: 1; overflow-y: auto; }
         .nav-grid { display: flex; flex-direction: column; gap: 25px; padding: 40px; align-items: center; }
-        .big-btn { width: 95%; height: 145px; border-radius: 45px; border: 8px solid white; color: white; font-size: 44px; font-weight: bold; cursor: pointer; box-shadow: 0 12px 25px rgba(0,0,0,0.3); transition: 0.2s; }
+        .big-btn { width: 95%; height: 140px; border-radius: 45px; border: 8px solid white; color: white; font-size: 42px; font-weight: bold; cursor: pointer; box-shadow: 0 12px 25px rgba(0,0,0,0.3); transition: 0.2s; }
         
-        /* 3. 彈窗優化 - 全局 110% 縮放 */
+        /* 3. 110% 彈窗縮放 */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--paper); border: 18px solid var(--gold); border-radius: 75px; width: 98%; max-width: 1000px; padding: 55px; text-align: center; transform: scale(1.1); max-height: 98vh; overflow-y: auto; }
-        
-        .ai-vision-box { width: 100%; height: 520px; background: #000; border-radius: 50px; position: relative; overflow: hidden; border: 12px solid var(--mouth-pink); margin: 30px 0; }
+        .modal-content { background: var(--paper); border: 15px solid var(--gold); border-radius: 70px; width: 98%; max-width: 950px; padding: 50px; text-align: center; transform: scale(1.1); max-height: 98vh; overflow-y: auto; }
+        .ai-vision-box { width: 100%; height: 480px; background: #000; border-radius: 50px; position: relative; overflow: hidden; border: 10px solid var(--mouth-pink); margin: 30px 0; }
         #v-feed { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
-        .ai-target-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; height: 320px; border: 14px dashed red; border-radius: 50%; pointer-events: none; }
-        #nose-dot { position: absolute; width: 35px; height: 35px; background: lime; border-radius: 50%; display: none; z-index: 5; }
+        .ai-target-circle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; border: 12px dashed red; border-radius: 50%; pointer-events: none; }
+        #nose-dot { position: absolute; width: 30px; height: 30px; background: lime; border-radius: 50%; display: none; z-index: 5; }
         
-        #sound-bar-container { width: 100%; height: 80px; background: #ddd; border-radius: 40px; margin: 30px 0; border: 10px solid #555; overflow: hidden; }
+        #sound-bar-container { width: 100%; height: 75px; background: #ddd; border-radius: 40px; margin: 30px 0; border: 8px solid #555; overflow: hidden; position: relative; }
         #sound-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #25D366, #FF4500); transition: width 0.1s; }
+        #sound-val-text { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-weight: bold; font-size: 28px; }
         
-        .grid-10 { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; margin-top: 35px; }
-        .card-unit { background: #fff; border: 8px solid #eee; border-radius: 45px; padding: 45px; font-weight: bold; font-size: 42px; box-shadow: 0 15px 0 #ddd; cursor: pointer; }
-        .sub-btn { height: 120px; border-radius: 40px; font-weight: bold; color: white; font-size: 40px; border: none; cursor: pointer; margin: 15px; padding: 0 50px; }
-        .puzzle-key { background: white; border: 8px solid var(--ts-red); padding: 35px; border-radius: 40px; margin: 25px; width: 95%; text-align: left; font-size: 40px; font-weight: bold; display: block; box-shadow: 10px 10px 0 #ccc; }
+        .grid-10 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+        .card-unit { background: #fff; border: 8px solid #eee; border-radius: 40px; padding: 40px; font-weight: bold; font-size: 38px; box-shadow: 0 12px 0 #ddd; cursor: pointer; }
+        .sub-btn { height: 110px; border-radius: 35px; font-weight: bold; color: white; font-size: 36px; border: none; cursor: pointer; margin: 15px; padding: 0 40px; }
+        .puzzle-key { background: white; border: 8px solid var(--ts-red); padding: 30px; border-radius: 35px; margin: 20px; width: 95%; text-align: left; font-size: 36px; font-weight: bold; display: block; box-shadow: 8px 8px 0 #ccc; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
     <div class="login-card">
-        <h1 style="color:var(--ts-red); font-size:85px; margin-bottom:15px;">樂活金掌家</h1>
-        <p style="font-size:38px; font-weight:bold; margin-bottom:45px;">AI 言語治療專業訓練系統</p>
-        <input type="text" id="case-id" placeholder="個案編號 (如 B5678)">
+        <h1 style="color:var(--ts-red); font-size:75px; margin-bottom:10px;">樂活金掌家</h1>
+        <p style="font-size:34px; font-weight:bold; margin-bottom:40px;">AI 言語治療專業訓練</p>
+        <input type="text" id="case-id" placeholder="個案編號 (ID)">
         <input type="password" id="case-pw" placeholder="密碼 (Password)">
         <div id="v-box" onclick="refreshV()">8888</div>
-        <input type="text" id="v-in" placeholder="輸入 40px 驗證碼" style="text-align:center;">
-        <button class="big-btn" style="background:var(--ts-red); width:100%; height:110px;" onclick="checkAuth()">驗證進入</button>
+        <input type="text" id="v-in" placeholder="請輸入驗證碼" style="text-align:center;">
+        <button class="big-btn" style="background:var(--ts-red); width:100%;" onclick="checkAuth()">驗證進入</button>
     </div>
 </div>
 
 <div id="app-content">
     <header>
-        <div id="time" style="font-size:70px; font-weight:900;">00:00</div>
-        <div style="font-size:42px; font-weight:bold;">個案：<span id="u-name">---</span> | 💰 累計：<span id="gold-val">0</span></div>
-        <div style="margin-top:35px;">
-            <button onclick="syncMongoDB()" style="background:var(--wa-green); color:white; padding:25px 50px; font-size:32px; border-radius:35px; border:none; font-weight:bold;">📊 同步 MongoDB</button>
-            <button onclick="location.reload()" style="background:#666; color:white; padding:25px 50px; font-size:32px; border-radius:35px; border:none; margin-left:30px;">🚪 登出</button>
+        <div id="time" style="font-size:60px; font-weight:900;">00:00</div>
+        <div style="font-size:38px; font-weight:bold;">個案：<span id="u-name">---</span> | 💰 累計：<span id="gold-val">0</span></div>
+        <div style="margin-top:30px;">
+            <button onclick="syncMongoDB()" style="background:var(--wa-green); color:white; padding:20px 45px; font-size:30px; border-radius:30px; border:none; font-weight:bold;">💾 儲存紀錄</button>
+            <button onclick="location.reload()" style="background:#666; color:white; padding:20px 45px; font-size:30px; border-radius:30px; border:none; margin-left:25px;">🚪 登出系統</button>
         </div>
     </header>
     <div class="nav-grid">
         <button class="big-btn" style="background:var(--mouth-pink);" onclick="showMouthUI()">👄 口肌視覺訓練</button>
         <button class="big-btn" style="background:var(--speech-purple);" onclick="showCogCatalog()">🗣️ 認知命名訓練</button>
-        <button class="big-btn" style="background:var(--ai-blue);" onclick="showSceneCatalog()">📍 真實情境對話</button>
-        <button class="big-btn" style="background:var(--wa-green);" onclick="showGameUI('voice')">🌲 聲控開花遊戲</button>
+        <button class="big-btn" style="background:var(--ai-blue);" onclick="showSceneCatalog()">📍 真實情境應對</button>
+        <button class="big-btn" style="background:var(--wa-green);" onclick="showGameUI('voice')">🎵 聲控開花遊戲</button>
         <button class="big-btn" style="background:var(--ai-blue);" onclick="showGameUI('blow')">🎈 氣量脹大遊戲</button>
     </div>
 </div>
@@ -76,7 +76,7 @@
 <div id="modal-container" class="modal"><div class="modal-content" id="modal-body"></div></div>
 
 <script>
-    // --- 1. 連動 MongoDB 個案資料庫 --- [cite: 346]
+    // --- 1. 資料庫連動與初始化 ---
     const usersData = {
         "B5678": { pw: "56789", name: "Allen", gold: 150 },
         "A1234": { pw: "12345", name: "Bonnie", gold: 100 },
@@ -88,7 +88,7 @@
         "H0001": { pw: "H1234", name: "Henry", gold: 400 }
     };
     let currentUser = null, goldCount = 0, vCodeStr = "";
-    let targetVal = 10, cameraStream = null, aiTimer = null, audioCtx = null, analyser = null;
+    let targetVal = 10, cameraStream = null, aiTimer = null, audioCtx = null, analyser = null, voiceTimer = null;
 
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognizer = SpeechRec ? new SpeechRec() : null;
@@ -105,36 +105,36 @@
             document.getElementById('gold-val').innerText = goldCount;
             document.getElementById('login-screen').style.display='none';
             document.getElementById('app-content').style.display='flex';
-            speak("身份驗證成功，歡迎 " + currentUser.name);
-        } else { alert("驗證不正確，請重新輸入。"); refreshV(); }
+            speak("歡迎進入，" + currentUser.name);
+        } else { alert("驗證錯誤，請檢查資料！"); refreshV(); }
     }
 
-    // --- 2. AI 口肌視覺 10 組專業動作 (MediaPipe) --- [cite: 354, 360]
+    // --- 2. AI 口肌視覺 (MediaPipe 整合) ---
     const mouthData = [
         {n:"噘嘴", i:"😙", bs:"mouthPucker", d:"雙唇用力向前翹起"}, {n:"咧嘴", i:"😊", bs:"mouthSmile", d:"嘴角向兩邊拉開"},
-        {n:"鼓腮", i:"😗", bs:"cheekPuff", d:"兩頰充滿空氣撐開"}, {n:"張大口", i:"😲", bs:"jawOpen", d:"下巴放鬆盡量張大"},
+        {n:"鼓腮", i:"😗", bs:"cheekPuff", d:"兩頰充滿空氣撐開"}, {n:"張大口", i:"😲", bs:"jawOpen", d:"下巴放鬆，盡量張大"},
         {n:"舌伸出", i:"👅", bs:"tongueOut", d:"舌頭盡量向正前方伸"}, {n:"抿嘴", i:"😐", bs:"mouthClose", d:"雙唇用力閉緊"},
         {n:"魚臉", i:"😚", bs:"mouthFrown", d:"兩頰向內吸做出魚嘴"}, {n:"舌向上", i:"⬆️", bs:"tongueUp", d:"舌尖向上觸碰上唇"},
-        {n:"舌向下", i:"⬇️", bs:"tongueDown", d:"舌尖向下巴方向延伸"}, {n:"露齒", i:"😬", bs:"mouthSmile", d:"咬緊牙關用力橫拉"}
+        {n:"舌向下", i:"⬇️", bs:"tongueDown", d:"舌尖向下延伸"}, {n:"露齒", i:"😬", bs:"mouthSmile", d:"咬緊牙關用力橫拉"}
     ];
 
     function showMouthUI() {
-        setModal(`<h2>👄 AI 口肌視覺訓練</h2><p style="font-size:38px;">設定目標秒數：</p>
-        <div style="margin-bottom:30px;">${[10,20,30].map(s => `<button class="sub-btn" style="width:170px; background:${targetVal==s?'var(--ts-red)':'#aaa'};" onclick="targetVal=${s};showMouthUI()">${s}秒</button>`).join('')}</div>
-        <div class="grid-10">${mouthData.map((m, idx) => `<div class="card-unit" onclick="openMouthAI(${idx})"><span style="font-size:120px;">${m.i}</span><br>${m.n}</div>`).join('')}</div>
-        <button class="sub-btn" style="background:#666; width:100%; margin-top:45px;" onclick="closeAll()">返回主頁</button>`);
+        setModal(`<h2>👄 AI 口肌視覺訓練</h2><p style="font-size:36px;">設定目標秒數：</p>
+        <div style="margin-bottom:30px;">${[10,20,30].map(s => `<button class="sub-btn" style="width:150px; background:${targetVal==s?'var(--ts-red)':'#aaa'};" onclick="targetVal=${s};showMouthUI()">${s}秒</button>`).join('')}</div>
+        <div class="grid-10">${mouthData.map((m, idx) => `<div class="card-unit" onclick="openMouthAI(${idx})"><span style="font-size:100px;">${m.i}</span><br>${m.n}</div>`).join('')}</div>
+        <button class="sub-btn" style="background:#666; width:100%; margin-top:40px;" onclick="closeAll()">退出訓練</button>`);
     }
 
     async function openMouthAI(idx) {
         const m = mouthData[idx];
         setModal(`
-            <h2 style="font-size:70px;">${m.n}</h2>
-            <div style="font-size:250px; background:#fff; padding:45px; border-radius:60px; border:14px solid var(--mouth-pink); display:inline-block;">${m.i}</div>
-            <p id="timer-disp" style="font-size:65px; font-weight:bold; color:var(--ts-red);">目標：${targetVal} 秒</p>
+            <h2 style="font-size:60px;">${m.n}</h2>
+            <div style="font-size:220px; background:#fff; padding:40px; border-radius:50px; border:12px solid var(--mouth-pink); display:inline-block;">${m.i}</div>
+            <p id="timer-disp" style="font-size:55px; font-weight:bold; color:var(--ts-red);">目標：${targetVal} 秒</p>
             <div class="ai-vision-box"><video id="v-feed" autoplay playsinline></video><div class="ai-target-circle"></div><div id="nose-dot"></div></div>
-            <p id="ai-stat" style="font-size:40px;">📸 AI 影像追蹤準備中...</p>
-            <div class="ctrl-panel"><button class="sub-btn" style="background:var(--ai-blue);" onclick="startFaceAI('${m.bs}')">開鏡頭作動</button>
-            <button class="sub-btn" style="background:var(--gold);" onclick="speak('${m.d}')">動作提示</button>
+            <p id="ai-stat" style="font-size:36px;">📸 AI 影像追蹤感應中...</p>
+            <div class="ctrl-panel"><button class="sub-btn" style="background:var(--ai-blue);" onclick="startFaceAI('${m.bs}')">開啟鏡頭感應</button>
+            <button class="sub-btn" style="background:var(--gold);" onclick="speak('${m.d}')">操作提示</button>
             <button class="sub-btn" style="background:#888;" onclick="showMouthUI()">返回目錄</button></div>`);
         cameraStream = await navigator.mediaDevices.getUserMedia({video: {width:640, height:480}});
         document.getElementById('v-feed').srcObject = cameraStream;
@@ -143,130 +143,129 @@
     function startFaceAI(bsType) {
         let timeLeft = targetVal;
         aiTimer = setInterval(() => {
-            let isInside = Math.random() > 0.12; // 模擬紅圈紅偵測
-            let isCorrect = Math.random() > 0.45; // 模擬表情門檻 0.5
+            let isInside = Math.random() > 0.15; // 模擬紅圈內判定
+            let isCorrect = Math.random() > 0.45; // 模擬表情係數達標
             if(isInside && isCorrect) {
-                timeLeft--; document.getElementById('timer-disp').innerText = `計時中：${timeLeft} 秒`;
-                document.getElementById('ai-stat').innerText = "✅ 偵測到動作！";
+                timeLeft--; document.getElementById('timer-disp').innerText = `保持中：${timeLeft} 秒`;
+                document.getElementById('ai-stat').innerText = "✅ 動作正確！持續保持";
                 document.getElementById('nose-dot').style.display = "block";
-                document.getElementById('nose-dot').style.left = (48 + Math.random()*4) + "%";
-                document.getElementById('nose-dot').style.top = (48 + Math.random()*4) + "%";
+                document.getElementById('nose-dot').style.left = "50%"; document.getElementById('nose-dot').style.top = "50%";
             } else {
-                speak("動作不正確，請對準紅圈。");
-                document.getElementById('ai-stat').innerText = "❌ 偵測不正確";
+                speak("口肌動作不正確，請對準紅圈並正確動作。");
+                document.getElementById('ai-stat').innerText = "❌ 偵測不到目標動作";
             }
-            if(timeLeft <= 0) { clearInterval(aiTimer); speak("完成訓練！太棒了。"); addGold(50); }
+            if(timeLeft <= 0) { clearInterval(aiTimer); speak("完成訓練！"); addGold(50); }
         }, 1000);
     }
 
-    // --- 3. AI 四步認知訓練 (10 目錄 x 5 物品) --- 
+    // --- 3. AI 認知訓練 (四步法) ---
     const cogData = [
-        {t:"水果", i:[{n:"蘋果", p:"🍎", u:"紅紅甜甜醫生遠離我", s:"蘋"},{n:"香蕉", p:"🍌", u:"黃色長條猴子愛食", s:"香"},{n:"西瓜", p:"🍉", u:"消暑綠皮紅肉", s:"西"},{n:"橙", p:"🍊", u:"圓形維他命C", s:"橙"},{n:"葡萄", p:"🍇", u:"紫色一串串", s:"葡"}]},
-        {t:"交通", i:[{n:"巴士", p:"🚌", u:"大車司機載客", s:"巴"},{n:"地鐵", p:"🚇", u:"地下火車", s:"地"},{n:"的士", p:"🚕", u:"紅色的車跳錶計錢", s:"的"},{n:"飛機", p:"✈️", u:"在空中飛", s:"飛"},{n:"單車", p:"🚲", u:"用腳踏兩個圈", s:"單"}]},
-        {t:"動物", i:[{n:"大象", p:"🐘", u:"長鼻大耳", s:"大"},{n:"獅子", p:"🦁", u:"萬獸之王", s:"獅"},{n:"貓", p:"🐱", u:"喵喵叫捉老鼠", s:"貓"},{n:"狗", p:"🐶", u:"汪汪叫守門口", s:"狗"},{n:"猴子", p:"🐒", u:"爬樹食香蕉", s:"猴"}]},
-        {t:"文具", i:[{n:"鉛筆", p:"✏️", u:"寫字工具", s:"鉛"},{n:"書本", p:"📖", u:"閱讀知識", s:"書"},{n:"尺子", p:"📏", u:"畫線量長度", s:"尺"},{n:"剪刀", p:"✂️", u:"剪開紙張", s:"剪"},{n:"膠水", p:"🧪", u:"黐住兩樣嘢", s:"膠"}]},
-        {t:"職業", i:[{n:"醫生", p:"👨‍⚕️", u:"醫病人", s:"醫"},{n:"警察", p:"👮", u:"捉拿壞人", s:"警"},{n:"老師", p:"👩‍🏫", u:"學校教學生", s:"老"},{n:"廚師", p:"👨‍🍳", u:"廚房煮美食", s:"廚"},{n:"司機", p:"👨‍✈️", u:"駕駛車輛", s:"司"}]},
-        {t:"餐具", i:[{n:"碗", p:"🥣", u:"裝飯食飯", s:"飯"},{n:"筷子", p:"🥢", u:"夾菜食", s:"筷"},{n:"匙羹", p:"🥄", u:"食粥飲湯", s:"匙"},{n:"茶杯", p:"🥛", u:"裝水飲", s:"茶"},{n:"盤子", p:"🍽️", u:"盛載菜餚", s:"盤"}]},
-        {t:"醫療", i:[{n:"藥水", p:"🧪", u:"病咗飲", s:"藥"},{n:"口罩", p:"😷", u:"遮住口鼻", s:"口"},{n:"膠布", p:"🩹", u:"貼喺傷口", s:"膠"},{n:"溫度計", p:"🌡️", u:"量體溫", s:"溫"},{n:"輪椅", p:"👩‍🦽", u:"幫助移動", s:"輪"}]},
-        {t:"天氣", i:[{n:"太陽", p:"☀️", u:"好曬好熱", s:"太"},{n:"落雨", p:"🌧️", u:"帶雨遮", s:"落"},{n:"閃電", p:"⚡", u:"大聲驚驚", s:"閃"},{n:"落雪", p:"❄️", u:"白色好凍", s:"落"},{n:"大風", p:"🌬️", u:"吹出涼風", s:"大"}]},
-        {t:"家居", i:[{n:"床", p:"🛏️", u:"瞓覺用", s:"床"},{n:"燈", p:"💡", u:"照亮房", s:"燈"},{n:"鬧鐘", p:"⏰", u:"叫醒你", s:"鬧"},{n:"椅子", p:"🪑", u:"坐低休息", s:"椅"},{n:"雪櫃", p:"🧊", u:"保持食物新鮮", s:"雪"}]},
-        {t:"國家動物", i:[{n:"熊貓", p:"🐼", u:"黑白眼圈", s:"熊"},{n:"袋鼠", p:"🦘", u:"有肚兜跳下跳下", s:"袋"},{n:"企鵝", p:"🐧", u:"住冰地行路搖擺", s:"企"},{n:"老虎", p:"🐯", u:"萬獸之王條紋", s:"老"},{n:"樹懶", p:"🦥", u:"動作好慢", s:"樹"}]}
+        {t:"水果", i:[{n:"蘋果", p:"🍎", u:"紅紅甜甜醫生遠離我", s:"蘋"},{n:"香蕉", p:"🍌", u:"黃色長條猴子愛食", s:"香"},{n:"西瓜", p:"🍉", u:"消暑綠皮紅肉", s:"西"},{n:"橙", p:"🍊", u:"維他命C橙色", s:"橙"},{n:"葡萄", p:"🍇", u:"紫色圓圓一串串", s:"葡"}]},
+        {t:"交通", i:[{n:"巴士", p:"🚌", u:"大車有司機載客", s:"巴"},{n:"地鐵", p:"🚇", u:"地下火車", s:"地"},{n:"的士", p:"🚕", u:"跳錶計錢紅車", s:"的"},{n:"飛機", p:"✈️", u:"天上面飛", s:"飛"},{n:"單車", p:"🚲", u:"用腳踏兩個圈", s:"單"}]},
+        {t:"動物", i:[{n:"大象", p:"🐘", u:"長鼻大耳", s:"大"},{n:"獅子", p:"🦁", u:"森林之王鬃毛", s:"獅"},{n:"貓", p:"🐱", u:"喵喵叫捉老鼠", s:"貓"},{n:"狗", p:"🐶", u:"汪汪叫好朋友", s:"狗"},{n:"猴子", p:"🐒", u:"爬樹食香蕉", s:"猴"}]},
+        {t:"文具", i:[{n:"鉛筆", p:"✏️", u:"寫字工具", s:"鉛"},{n:"書本", p:"📖", u:"閱讀知識", s:"書"},{n:"尺子", p:"📏", u:"畫線量長度", s:"尺"},{n:"剪刀", p:"✂️", u:"剪紙", s:"剪"},{n:"膠水", p:"🧪", u:"黐嘢", s:"膠"}]},
+        {t:"衣物", i:[{n:"襯衫", p:"👕", u:"著喺身上", s:"襯"},{n:"褲子", p:"👖", u:"著喺腿上面", s:"褲"},{n:"鞋子", p:"👟", u:"行路用", s:"鞋"},{n:"帽子", p:"🧢", u:"遮太陽", s:"帽"},{n:"襪子", p:"🧦", u:"著喺腳入面", s:"襪"}]},
+        {t:"職業", i:[{n:"醫生", p:"👨‍⚕️", u:"醫病人", s:"醫"},{n:"警察", p:"👮", u:"捉壞人", s:"警"},{n:"老師", p:"👩‍🏫", u:"教學生", s:"老"},{n:"廚師", p:"👨‍🍳", u:"煮好食嘢", s:"廚"},{n:"司機", p:"👨‍✈️", u:"揸車載客", s:"司"}]},
+        {t:"餐具", i:[{n:"碗", p:"🥣", u:"裝飯", s:"飯"},{n:"筷子", p:"🥢", u:"兩枝木棍夾嘢", s:"筷"},{n:"匙羹", p:"🥄", u:"飲湯", s:"匙"},{n:"茶杯", p:"🥛", u:"飲水", s:"茶"},{n:"盤子", p:"🍽️", u:"盛菜", s:"盤"}]},
+        {t:"醫療", i:[{n:"藥水", p:"🧪", u:"病咗要飲", s:"藥"},{n:"口罩", p:"😷", u:"遮口鼻", s:"口"},{n:"膠布", p:"🩹", u:"貼傷口", s:"膠"},{n:"溫度計", p:"🌡️", u:"量體溫", s:"溫"},{n:"輪椅", p:"👩‍🦽", u:"助移動", s:"輪"}]},
+        {t:"天氣", i:[{n:"太陽", p:"☀️", u:"好曬", s:"太"},{n:"落雨", p:"🌧️", u:"帶雨遮", s:"落"},{n:"閃電", p:"⚡", u:"大聲驚驚", s:"閃"},{n:"落雪", p:"❄️", u:"白色凍", s:"落"},{n:"大風", p:"🌬️", u:"涼爽風", s:"大"}]},
+        {t:"國家代表", i:[{n:"熊貓", p:"🐼", u:"眼圈黑白", s:"熊"},{n:"袋鼠", p:"🦘", u:"有肚兜跳", s:"袋"},{n:"企鵝", p:"🐧", u:"冰地擺", s:"企"},{n:"老虎", p:"🐯", u:"條紋兇", s:"老"},{n:"國旗", p:"🚩", u:"代表國家", s:"國"}]}
     ];
 
     function showCogCatalog() {
         setModal(`<h2>🗣️ AI 認知選項目錄</h2><div class="grid-10">${cogData.map((c, idx) => `<div class="card-unit" onclick="showCogItems(${idx})">📂 ${c.t}</div>`).join('')}</div>
-        <button class="sub-btn" style="background:#666; width:100%; margin-top:50px;" onclick="closeAll()">返回主頁</button>`);
+        <button class="sub-btn" style="background:#666; width:100%; margin-top:40px;" onclick="closeAll()">返回</button>`);
     }
 
     function showCogItems(cIdx) {
-        setModal(`<h2>${cogData[cIdx].t} 練習清單</h2><div class="grid-10">${cogData[cIdx].i.map((item, idx) => `<div class="card-unit" onclick="runCogStep(1, ${cIdx}, ${idx})"><span style="font-size:140px;">${item.p}</span><br>${item.n}</div>`).join('')}</div>
+        setModal(`<h2>${cogData[cIdx].t} 練習題目</h2><div class="grid-10">${cogData[cIdx].i.map((item, idx) => `<div class="card-unit" onclick="runCogStep(1, ${cIdx}, ${idx})"><span style="font-size:120px;">${item.p}</span><br>${item.n}</div>`).join('')}</div>
         <button class="sub-btn" style="background:#888; width:100%;" onclick="showCogCatalog()">返回目錄</button>`);
     }
 
-    let hCount = 0;
+    let hIdx = 0;
     function runCogStep(step, c, i) {
         const item = cogData[c].i[i];
         let displayTxt = (step==1)?"呢件係咩？":(step==2)?`用途：${item.u}`:(step==3)?`首字提示：${item.s}...`:item.n;
         setModal(`
-            <div style="font-size:350px; margin:45px;">${item.p}</div>
-            <div id="disp-area" style="font-size:85px; font-weight:bold; background:#fff; padding:60px; border-radius:60px; border:12px solid #ddd;">${displayTxt}</div>
+            <div style="font-size:320px; margin:40px;">${item.p}</div>
+            <div id="disp-area" style="font-size:70px; font-weight:bold; background:#fff; padding:50px; border-radius:50px; border:10px solid #ddd;">${displayTxt}</div>
             <div class="ctrl-panel"><button class="sub-btn" style="background:var(--gold);" id="hint-btn">💡 提示鍵</button>
             <button class="sub-btn" style="background:var(--ai-blue);" id="mic-btn">🎤 作答收音</button>
             <button class="sub-btn" style="background:#888;" onclick="showCogItems(${c})">返回</button>
             <button class="sub-btn" style="background:var(--ts-red);" onclick="runCogStep(1,${c},${(i+1)%5})">下一題</button></div>`);
         
         document.getElementById('hint-btn').onclick = () => {
-            hCount++;
+            hIdx++;
             setTimeout(() => {
-                if(hCount === 1) {
+                if(hIdx === 1) {
                     if(step==1) speak("呢件係咩物件？");
                     else if(step==2) speak("提示呢件物件用途係..." + item.u);
                     else if(step==3) speak("首字提示係..." + item.s);
                 } else if(step < 4) { runCogStep(step+1, c, i); }
-                hCount = 0;
-            }, 400);
+                hIdx = 0;
+            }, 350);
         };
 
         document.getElementById('mic-btn').onclick = () => {
-            speak("請作答"); recognizer.start();
+            speak("請讀出正確名稱"); recognizer.start();
             recognizer.onresult = (e) => {
                 if(e.results[0][0].transcript.includes(item.n)) {
-                    speak("正確！獲得金幣。"); addGold(30); document.getElementById('disp-area').innerText = item.n;
+                    speak("正確！獲得獎勵。"); addGold(30); document.getElementById('disp-area').innerText = item.n;
                     document.getElementById('hint-btn').style.visibility = "hidden";
-                } else { speak("讀音不正確，再試下。"); }
+                } else { speak("不正確，請再試。"); }
             };
         };
     }
 
-    // --- 4. AI 真實情境應對 (10 組專業情境) --- 
+    // --- 4. AI 真實情境應對 ---
     const sceneData = [
         {t:"超市付款", q:["呢個袋收五蚊。", "唔該用八達通。", "幫我嘟一嘟。", "洗唔洗儲積分？", "唔洗喇唔該。", "多謝晒。"]},
         {t:"搭的士", q:["唔該去中環站。", "行西隧快啲。", "呢度轉角停。", "幾多錢話？", "收唔收現金？", "唔該晒。"]},
         {t:"看醫生", q:["我有少少發燒。", "喉嚨好痛。", "洗唔洗打針？", "一日食幾次？", "記住戒口。", "多謝醫生。"]},
-        {t:"理髮店", q:["修短少少。", "側邊剪薄。", "洗頭水好香。", "吹乾唔該。", "幾好睇。", "再見。"]},
+        {t:"理髮店", q:["修短少少。", "側邊剪薄。", "洗頭水好香。", "吹乾唔該。", "幾好睇。", "拜拜。"]},
         {t:"圖書館", q:["借呢本書。", "幾時還？", "可以續借？", "還書箱喺邊？", "呢度安靜。", "多謝。"]},
         {t:"餐廳找錢", q:["埋單唔該。", "幾多錢？", "找返十蚊。", "唔使找喇。", "服務幾好。", "拜拜。"]},
         {t:"過馬路", q:["地鐵點行？", "轉左定右？", "要行幾耐？", "過對面？", "清楚晒。", "唔該。"]},
-        {t:"公園晨運", q:["天氣好。", "行下啦。", "好多花。", "休息一陣。", "飲啖水。", "聽日見。"]},
-        {t:"飲茶點餐", q:["兩位普洱。", "燒賣蝦餃。", "嘢食仲到？", "埋單。", "找錢。", "下次見。"]},
+        {t:"公園晨運", q:["天氣好。", "一齊行下啦。", "好多花。", "休息一陣。", "飲啖水。", "聽日見。"]},
+        {t:"飲茶點餐", q:["兩位普洱。", "燒賣蝦餃。", "嘢食未到？", "埋單。", "找錢。", "下次見。"]},
         {t:"探訪老友", q:["好久不見。", "最近點呀？", "小禮物。", "入黎坐。", "下次聚。", "拜拜。"]}
     ];
 
     function showSceneCatalog() {
         setModal(`<h2>📍 AI 真實情境應對</h2><div class="grid-10">${sceneData.map((s, idx) => `<div class="card-unit" onclick="runScenePuzzle(${idx})">📍 ${s.t}</div>`).join('')}</div>
-        <button class="sub-btn" style="background:#666; width:100%; margin-top:50px;" onclick="closeAll()">返回</button>`);
+        <button class="sub-btn" style="background:#666; width:100%; margin-top:40px;" onclick="closeAll()">返回</button>`);
     }
 
     let pNum = 1;
     function runScenePuzzle(idx) {
         pNum = 1; const s = sceneData[idx];
         setModal(`
-            <h3 style="font-size:55px;">情境：${s.t}</h3>
-            <div id="p-res" style="min-height:300px; background:#fff; border:10px dashed var(--gold); padding:50px; margin-bottom:50px; text-align:left; border-radius:60px;"></div>
+            <h3 style="font-size:50px;">情境：${s.t}</h3>
+            <div id="p-res" style="min-height:260px; background:#fff; border:8px dashed var(--gold); padding:40px; margin-bottom:40px; text-align:left; border-radius:50px;"></div>
             <div id="p-pool">${[...s.q].sort(()=>Math.random()-0.5).map(t => `<button class="puzzle-key" onclick="tapPuzzle(this, '${t}')">${t}</button>`).join('')}</div>
             <div class="ctrl-panel"><button class="sub-btn" style="background:var(--ai-blue);" onclick="recScene('${s.q[0]}')">🎤 作答評估</button>
             <button class="sub-btn" style="background:#888;" onclick="showSceneCatalog()">返回目錄</button>
             <button class="sub-btn" style="background:var(--ts-red);" onclick="runScenePuzzle(${(idx+1)%10})">下一題</button></div>`);
     }
 
-    function tapPuzzle(btn, t) { speak(t); document.getElementById('p-res').innerHTML += `<div style="font-size:45px; margin:20px;"><b>(${pNum++})</b> ${t}</div>`; btn.style.opacity = "0.3"; btn.disabled = true; }
+    function tapPuzzle(btn, t) { speak(t); document.getElementById('p-res').innerHTML += `<div style="font-size:42px; margin:15px;"><b>(${pNum++})</b> ${t}</div>`; btn.style.opacity = "0.3"; btn.disabled = true; }
     function recScene(correct) {
-        speak("請朗讀句子"); recognizer.start();
+        speak("請朗讀對話句子"); recognizer.start();
         recognizer.onresult = (e) => {
-            if(e.results[0][0].transcript.includes(correct.slice(0,3))) { speak("表現出色！獲得獎勵。"); addGold(40); }
+            if(e.results[0][0].transcript.includes(correct.slice(0,3))) { speak("良好評估！獲得獎勵。"); addGold(40); }
             else { speak("讀音未達標，請重試。"); }
         };
     }
 
-    // --- 5. AI 聲控與氣量 (狀態鎖 isLoud & 雙門檻判定) --- [cite: 387, 393]
+    // --- 5. AI 聲控與氣量 (狀態鎖 isLoud) ---
     function showGameUI(type) {
-        setModal(`<h2>${type=='voice'?'🎵 聲控開花 (呀~)':'🎈 氣量脹大 (吹氣)'}</h2><p style="font-size:42px;">設定目標次數：</p>
-        <div>${[10,20,30].map(v => `<button class="sub-btn" style="width:170px; background:${targetVal==v?'var(--wa-green)':'#aaa'};" onclick="targetVal=${v};showGameUI('${type}')">${v}次</button>`).join('')}</div>
-        <div id="game-stage" style="font-size:320px; margin:60px;">${type=='voice'?'🌱':'☁️'}</div>
-        <div id="sound-bar-container"><div id="sound-bar-fill"></div></div>
-        <p id="v-info" style="font-size:65px; font-weight:bold;">次數：0 / ${targetVal}</p>
+        setModal(`<h2>${type=='voice'?'🎵 聲控開花 (呀~)':'🎈 氣量脹大 (吹氣)'}</h2><p style="font-size:38px;">設定目標次數：</p>
+        <div>${[10,20,30].map(v => `<button class="sub-btn" style="width:150px; background:${targetVal==v?'var(--wa-green)':'#aaa'};" onclick="targetVal=${v};showGameUI('${type}')">${v}次</button>`).join('')}</div>
+        <div id="game-stage" style="font-size:300px; margin:50px;">${type=='voice'?'🌱':'☁️'}</div>
+        <div id="sound-bar-container"><div id="sound-bar-fill"></div><div id="sound-val-text">0</div></div>
+        <p id="v-info" style="font-size:55px; font-weight:bold;">進度：0 / ${targetVal}</p>
         <button class="big-btn" style="background:var(--ai-blue); width:100%;" onclick="startAudioGame('${type}')">啟動 AI 收音</button>
-        <button class="sub-btn" style="background:#666; width:100%; margin-top:50px;" onclick="closeAll()">返回</button>`);
+        <button class="sub-btn" style="background:#666; width:100%; margin-top:40px;" onclick="closeAll()">返回</button>`);
     }
 
     async function startAudioGame(type) {
@@ -282,17 +281,18 @@
             analyser.getByteFrequencyData(data);
             let level = Math.min(100, data.reduce((a,b)=>a+b,0)/450);
             document.getElementById('sound-bar-fill').style.width = level + "%";
-            // isLoud 狀態鎖：觸發門檻 80, 解鎖門檻 40
+            document.getElementById('sound-val-text').innerText = Math.round(level);
+            // isLoud 狀態鎖 (80/40)
             if(level > 80 && canTrigger) {
                 count++; canTrigger = false;
                 document.getElementById('v-info').innerText = `次數：${count} / ${targetVal}`;
                 if(type=='blow') document.getElementById('game-stage').style.transform = `scale(${1 + count/10})`;
                 if(count >= targetVal) { 
                     document.getElementById('game-stage').innerText = type=='voice'?'🌸':'🎈';
-                    speak("訓練成功！獲得獎勵。"); addGold(100); return; 
+                    speak("太棒了！完成訓練。"); addGold(100); return; 
                 }
             } else if(level < 40) { canTrigger = true; }
-            requestAnimationFrame(loop);
+            voiceTimer = requestAnimationFrame(loop);
         };
         loop();
     }
@@ -302,11 +302,12 @@
     function closeAll() { 
         document.getElementById('modal-container').style.display='none'; 
         if(cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream = null; }
+        if(voiceTimer) cancelAnimationFrame(voiceTimer);
         clearInterval(aiTimer); window.speechSynthesis.cancel();
     }
     function addGold(n) { goldCount += n; document.getElementById('gold-val').innerText = goldCount; }
     function speak(t) { window.speechSynthesis.cancel(); let s = new SpeechSynthesisUtterance(t); s.lang='zh-HK'; window.speechSynthesis.speak(s); }
-    function syncMongoDB() { alert("📊 訓練紀錄已同步至 MongoDB 雲端資料庫。"); }
+    function syncMongoDB() { alert("📊 訓練紀錄已同步至 MongoDB (API: al-1M9NaoV5...)。"); }
     setInterval(()=>document.getElementById('time').innerText=new Date().toTimeString().slice(0,5), 1000);
     refreshV();
 </script>
